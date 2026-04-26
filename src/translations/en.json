@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "projects": "Projects",
+    "contact_now": "Contact Us Now"
+  },
+  "hero": {
+    "title": "Define Your Digital Identity",
+    "subtitle": "We craft high-end digital experiences that resonate, inspire, and drive growth. Reclama is where innovation meets art.",
+    "cta": "Start Your Project",
+    "explore": "Explore Work"
+  },
+  "services": {
+    "title": "Our World-Class Expertise",
+    "design": { "title": "Digital Design", "desc": "Professional UI/UX designs that attract and convert customers." },
+    "dev": { "title": "Web Development", "desc": "Fast, modern websites and web apps using cutting-edge tech." },
+    "brand": { "title": "Branding", "desc": "Complete visual identity that reflects your brand's power." },
+    "marketing": { "title": "Digital Marketing", "desc": "Smart ad campaigns that boost sales and expand your audience." },
+    "content": { "title": "Content Production", "desc": "Creative visual and written content to strengthen your presence." },
+    "social": { "title": "Social Media Management", "desc": "Professional management with effective content strategies." }
+  }
+}
