@@ -4,6 +4,7 @@ import { Monitor, Smartphone, Search, PlayCircle, Fingerprint, ChevronRight } fr
 import { useRef } from 'react';
 import MockupLaptop from './MockupLaptop';
 import MockupPhone from './MockupPhone';
+import MockupSEO from './MockupSEO';
 import MockupVideo from './MockupVideo';
 import MockupBranding from './MockupBranding';
 import FloatingShapes from './FloatingShapes';
@@ -56,14 +57,14 @@ export default function Services() {
     ? [
         { id: 1, icon: <Monitor size={36} />, title: 'تصميم المواقع', desc: 'مواقع تسويقية عالية الأداء، صفحات هبوط، وتجارب ويب مبنية بتقنيات WebGL و React مع اهتمام فائق بالتفاصيل.', size: 'large', mockup: 'laptop' },
         { id: 2, icon: <Smartphone size={32} />, title: 'تطبيقات الجوال', desc: 'منتجات iOS و Android — من النماذج الأولية إلى الإنتاج الكامل مع مزامنة فورية، دفع، وإشعارات.', size: 'medium', mockup: 'phone' },
-        { id: 3, icon: <Search size={32} />, title: 'تحسين محركات البحث', desc: 'سيو تقني، مجموعات محتوى، ومخططات تجعل علامتك تتصدر جوجل وتظهر بذكاء في ملخصات الذكاء الاصطناعي.', size: 'small', spline: "https://prod.spline.design/3c7y8AhUiYtI2LFG/scene.splinecode" },
+        { id: 3, icon: <Search size={32} />, title: 'تحسين محركات البحث', desc: 'سيو تقني، مجموعات محتوى، ومخططات تجعل علامتك تتصدر جوجل وتظهر بذكاء في ملخصات الذكاء الاصطناعي.', size: 'small', mockup: 'seo' },
         { id: 4, icon: <PlayCircle size={32} />, title: 'الموشن جرافيك', desc: 'موشن جرافيك للعلامات التجارية، ريلز إعلانية، فيديوهات شرح المنتجات، وتترات — نبتكرها باستخدام After Effects و Cinema 4D.', size: 'small', mockup: 'video' },
         { id: 5, icon: <Fingerprint size={32} />, title: 'الهوية التجارية', desc: 'هويات استراتيجية مصممة لتضعك في مكانة مميزة في السوق — شعارات، أنظمة بصرية، ونبرة صوت العلامة.', size: 'small', mockup: 'branding' },
       ]
     : [
         { id: 1, icon: <Monitor size={36} />, title: 'Website design', desc: 'High-performance marketing sites, landing pages, web experiences built with WebGL and React, and obsessive details.', size: 'large', mockup: 'laptop' },
         { id: 2, icon: <Smartphone size={32} />, title: 'Mobile apps', desc: 'iOS and Android products — from MVP to full-fledged production with real-time syncing, payments and notifications.', size: 'medium', mockup: 'phone' },
-        { id: 3, icon: <Search size={32} />, title: 'SEO', desc: 'Technical SEO, content clusters, and a schema that makes the brand rank highly on Google and be remembered in AI Overviews.', size: 'small', spline: "https://prod.spline.design/3c7y8AhUiYtI2LFG/scene.splinecode" },
+        { id: 3, icon: <Search size={32} />, title: 'SEO', desc: 'Technical SEO, content clusters, and a schema that makes the brand rank highly on Google and be remembered in AI Overviews.', size: 'small', mockup: 'seo' },
         { id: 4, icon: <PlayCircle size={32} />, title: 'Motion graphics', desc: 'Brand motion graphics, advertising reels, product explanation videos, and title sequences — we create them with After Effects and Cinema 4D.', size: 'small', mockup: 'video' },
         { id: 5, icon: <Fingerprint size={32} />, title: 'Business identity', desc: 'Strategic brand identities designed to put you in a distinctive market position — logos, systems, and tone of voice.', size: 'small', mockup: 'branding' },
       ];
@@ -112,7 +113,7 @@ export default function Services() {
                 scale: 1.02,
                 transition: { duration: 0.4, ease: "easeOut" }
               }}
-              className={`service-card-bento ${s.size} ${s.mockup || s.spline ? 'has-mockup' : ''}`}
+              className={`service-card-bento ${s.size} has-mockup`}
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -124,18 +125,12 @@ export default function Services() {
               <div className="card-noise"></div>
               <div className="card-glow"></div>
               
-              {/* 3D Mockups */}
+              {/* 3D Mockups (Pure CSS/Framer - FAST) */}
               {s.mockup === 'laptop' && <MockupLaptop />}
               {s.mockup === 'phone' && <MockupPhone />}
+              {s.mockup === 'seo' && <MockupSEO />}
               {s.mockup === 'video' && <MockupVideo />}
               {s.mockup === 'branding' && <MockupBranding />}
-              
-              {/* Spline 3D (Restored for SEO) */}
-              {s.spline && (
-                <div className="spline-container">
-                  <spline-viewer url={s.spline} events-target="global"></spline-viewer>
-                </div>
-              )}
 
               <div className="card-content">
                 <div className="service-number">0{s.id}</div>
