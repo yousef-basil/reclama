@@ -34,9 +34,9 @@ function DepthCard({ children, className, depth = 50 }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      style={{ 
-        rotateX, 
-        rotateY, 
+      style={{
+        rotateX,
+        rotateY,
         transformPerspective: 1200,
         z: isHovered ? 30 : 0
       }}
@@ -46,7 +46,7 @@ function DepthCard({ children, className, depth = 50 }) {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`${className} depth-card`}
     >
-      <motion.div 
+      <motion.div
         className="depth-glow"
         style={{
           background: useTransform(
@@ -66,13 +66,13 @@ function DepthCard({ children, className, depth = 50 }) {
 export default function About() {
   const { t, i18n } = useTranslation();
   const sectionRef = useRef(null);
-  
+
   // Advanced Scroll Parallax
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const bgY1 = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
   const bgY2 = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  
+
   return (
     <section id="about" className="about-section" ref={sectionRef}>
       {/* 3D Animated Background Shapes */}
@@ -84,7 +84,7 @@ export default function About() {
 
       <div className="container relative z-10">
         {/* Floating Header */}
-        <motion.div 
+        <motion.div
           style={{ y: textY }}
           className="about-header"
         >
@@ -92,7 +92,7 @@ export default function About() {
             <Sparkles size={16} />
             <span>{t('about.title')}</span>
           </div>
-          
+
           <h2 className="section-title text-glow">
             {t('about.tagline')}
           </h2>
@@ -100,14 +100,14 @@ export default function About() {
 
         {/* 3D Grid Layout */}
         <div className="about-3d-grid">
-          
+
           {/* Founder 3D Card */}
           <DepthCard className="founder-card-3d glass" depth={60}>
             <div className="founder-image-wrapper">
               <div className="image-border-animated" />
-              <img 
-                src="/Alaa-hamdon-1.webp" 
-                alt={t('about.founder.name')} 
+              <img
+                src="/alaa-hamdon.webp"
+                alt={t('about.founder.name')}
                 className="founder-image pop-out"
               />
               <div className="founder-overlay" />
@@ -124,7 +124,7 @@ export default function About() {
 
           {/* Description & CTA */}
           <div className="about-content-stack">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -132,7 +132,7 @@ export default function About() {
             >
               <p className="main-desc-3d">{t('about.description')}</p>
             </motion.div>
-            
+
             <DepthCard className="cta-box-3d glass" depth={40}>
               <div className="cta-glow-bg" />
               <Rocket className="cta-icon-3d" size={48} />
