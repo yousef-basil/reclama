@@ -36,8 +36,8 @@ function App() {
         <main>
           <Hero />
           <BrandsTicker />
-          <About />
           <Services />
+          <About />
 
           {/* Footer */}
           <footer className="site-footer">
