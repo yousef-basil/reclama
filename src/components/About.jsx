@@ -106,7 +106,7 @@ export default function About() {
             <div className="founder-image-wrapper">
               <div className="image-border-animated" />
               <img 
-                src="/alaa_hamdon.png" 
+                src="/Alaa-hamdon-1.webp" 
                 alt={t('about.founder.name')} 
                 className="founder-image pop-out"
               />
