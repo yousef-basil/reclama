@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Target, Eye, Rocket, Quote, Sparkles } from 'lucide-react';
+import founderImg from '../assets/alaa-hamdon.webp';
 import './About.css';
 
 /* ---- 3D Parallax Tilt Card ---- */
@@ -106,7 +107,7 @@ export default function About() {
             <div className="founder-image-wrapper">
               <div className="image-border-animated" />
               <img
-                src="/alaa-hamdon.webp"
+                src={founderImg}
                 alt={t('about.founder.name')}
                 className="founder-image pop-out"
               />
