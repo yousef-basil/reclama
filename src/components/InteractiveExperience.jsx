@@ -23,15 +23,15 @@ export default function InteractiveExperience() {
           style={{ opacity, y }}
         >
           <div className="section-tag glass-tag">
-            {i18n.language === 'ar' ? 'تفاعل معنا' : 'Interact with us'}
+            {i18n.language === 'ar' ? 'التجارب التفاعلية' : 'Interactive Experiences'}
           </div>
           <h2 className="section-title text-glow">
-            {i18n.language === 'ar' ? 'العب مع إبداعنا' : 'Play with our creativity'}
+            {i18n.language === 'ar' ? 'إبداع رقمي يتجاوز الحدود' : 'Digital Creativity Beyond Boundaries'}
           </h2>
           <p className="interactive-subtitle">
             {i18n.language === 'ar' 
-              ? 'حرك الماوس واسحب المجسم في جميع الاتجاهات لاستكشاف قدراتنا في بناء تجارب الويب التفاعلية.'
-              : 'Move your mouse and drag the object in all directions to explore our capabilities in building interactive web experiences.'}
+              ? 'اكتشف كيف ندمج التصميم المتقدم بالتقنية الحديثة لبناء واجهات ويب تفاعلية ومرنة تترك أثراً استثنائياً لعلامتك التجارية.'
+              : 'Discover how we blend advanced design with modern technology to build highly interactive web interfaces that leave an exceptional impact.'}
           </p>
         </motion.div>
       </div>
