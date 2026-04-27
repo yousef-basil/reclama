@@ -44,7 +44,7 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="desktop-nav">
-          {['home', 'services', 'about', 'projects', 'contact'].map((item) => (
+          {['home', 'about', 'services', 'projects', 'contact'].map((item) => (
             <a key={item} href={`#${item}`} className="nav-link">
               {t(`nav.${item}`)}
             </a>
@@ -77,7 +77,7 @@ export default function Header() {
             exit={{ opacity: 0, height: 0 }}
             className="mobile-nav"
           >
-            {['home', 'services', 'about', 'projects', 'contact'].map((item, i) => (
+            {['home', 'about', 'services', 'projects', 'contact'].map((item, i) => (
               <motion.a
                 key={item}
                 href={`#${item}`}
