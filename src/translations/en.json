@@ -21,5 +21,26 @@
     "marketing": { "title": "Digital Marketing", "desc": "Smart ad campaigns that boost sales and expand your audience." },
     "content": { "title": "Content Production", "desc": "Creative visual and written content to strengthen your presence." },
     "social": { "title": "Social Media Management", "desc": "Professional management with effective content strategies." }
+  },
+  "about": {
+    "title": "About Us",
+    "tagline": "Elevating brands through marketing and creativity.",
+    "description": "At Reclama, we innovate digital campaigns, crafting effective content and strategies that empower businesses to highlight their presence and achieve growth in the digital world.",
+    "founder": {
+      "name": "Alaa Hamdon",
+      "title": "Founder & CEO"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "desc": "We strive to empower brands with innovative and creative digital solutions that contribute to growth, build trust, and deliver tangible results through strategy, design, and innovation."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "desc": "We aim to be a leading digital agency that shapes unique and inspiring experiences through modern design, advanced technology, and impactful storytelling."
+    },
+    "cta": {
+      "title": "Work With Us",
+      "desc": "Let's innovate together, from building a strong brand to inspiring digital experiences that leave an impact and drive conversions."
+    }
   }
 }

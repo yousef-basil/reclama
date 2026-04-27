@@ -1,0 +1,276 @@
+.about-section {
+  padding: 12rem 0;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.about-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.a-shape {
+  position: absolute;
+  filter: blur(100px);
+  opacity: 0.15;
+  border-radius: 50%;
+}
+
+.shape-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--accent);
+  top: -200px;
+  right: -100px;
+}
+
+.shape-2 {
+  width: 500px;
+  height: 500px;
+  background: #00ffcc;
+  bottom: -150px;
+  left: -100px;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 8rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+  margin-bottom: 8rem;
+}
+
+/* Founder Card */
+.founder-card {
+  padding: 2.5rem;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  transition: border-color 0.4s ease;
+}
+
+.founder-card:hover {
+  border-color: rgba(191, 255, 0, 0.4);
+}
+
+.founder-image-container {
+  width: 100%;
+  aspect-ratio: 1/1.2;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.founder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.founder-card:hover .founder-image {
+  transform: scale(1.05);
+}
+
+.founder-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.founder-info h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.founder-info p {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.founder-quote {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Description & CTA */
+.about-description {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.main-desc {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+}
+
+[dir="rtl"] .main-desc {
+  font-size: 1.6rem;
+  line-height: 1.8;
+}
+
+.cta-box {
+  padding: 3rem;
+  border-radius: 24px;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: var(--accent);
+  filter: blur(80px);
+  opacity: 0.1;
+  top: -20px;
+  right: -20px;
+}
+
+.cta-icon {
+  color: var(--accent);
+  filter: drop-shadow(0 0 10px var(--accent));
+}
+
+.cta-content h4 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+}
+
+.cta-content p {
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 30px rgba(191, 255, 0, 0.4);
+}
+
+/* Mission & Vision */
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.mv-card {
+  padding: 4rem;
+  border-radius: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.mv-icon-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: rgba(191, 255, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.mv-card h3 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.mv-card p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+}
+
+.mv-bg-icon {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 8rem;
+  font-weight: 900;
+  color: rgba(191, 255, 0, 0.03);
+  font-family: monospace;
+  pointer-events: none;
+  transform: rotate(-15deg);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  .founder-card {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-vision-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-title {
+    font-size: 2.5rem;
+  }
+  .mv-card {
+    padding: 2.5rem;
+  }
+  .cta-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}

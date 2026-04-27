@@ -2,6 +2,7 @@ import './i18n';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import BrandsTicker from './components/BrandsTicker';
+import About from './components/About';
 import Services from './components/Services';
 import Preloader from './components/Preloader';
 import { useTranslation } from 'react-i18next';
@@ -35,6 +36,7 @@ function App() {
         <main>
           <Hero />
           <BrandsTicker />
+          <About />
           <Services />
 
           {/* Footer */}
