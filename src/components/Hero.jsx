@@ -97,7 +97,7 @@ function Spline3D() {
   return (
     <motion.div style={{ y, opacity }} className="spline-container">
       <spline-viewer 
-        url="https://prod.spline.design/4zqKhZ8Q87pUKmXg/scene.splinecode"
+        url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
         events-target="global"
       ></spline-viewer>
     </motion.div>
