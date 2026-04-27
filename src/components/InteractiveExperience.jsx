@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { Hand } from 'lucide-react';
 import './InteractiveExperience.css';
 
 export default function InteractiveExperience() {
   const { t, i18n } = useTranslation();
   const sectionRef = useRef(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -36,8 +38,22 @@ export default function InteractiveExperience() {
         </motion.div>
       </div>
 
-      <motion.div className="interactive-spline-wrapper" style={{ opacity }}>
+      <motion.div 
+        className="interactive-spline-wrapper" 
+        style={{ opacity }}
+        onMouseDown={() => setHasInteracted(true)}
+        onTouchStart={() => setHasInteracted(true)}
+      >
         <div className="spline-glow-bg"></div>
+        
+        {/* Interaction Hint Overlay */}
+        <div className={`interaction-hint ${hasInteracted ? 'hidden' : ''}`}>
+          <div className="hint-icon">
+            <Hand size={32} />
+          </div>
+          <span>{i18n.language === 'ar' ? 'اسحب للتفاعل' : 'Drag to interact'}</span>
+        </div>
+
         <spline-viewer 
           url="https://prod.spline.design/V3S4JyNCcYa8hagW/scene.splinecode"
           events-target="global"
