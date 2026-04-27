@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import './BrandsTicker.css';
 
 const brands = [
@@ -8,7 +9,7 @@ const brands = [
   },
   { 
     name: 'Meta', 
-    logo: <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 14.5v-9l5.5 4.5L13 16.5z" fill="#0668E1"/></svg> // Simplified professional Meta icon
+    logo: <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 14.5v-9l5.5 4.5L13 16.5z" fill="#0668E1"/></svg>
   },
   { 
     name: 'Amazon', 
@@ -32,35 +33,53 @@ const brands = [
   },
   { 
     name: 'Shopify', 
-    logo: <svg viewBox="0 0 24 24"><path d="M19.5 9.5l-1.5-6h-12l-1.5 6h15z" fill="#96BF48"/><path d="M3 10l2 11h14l2-11H3z" fill="#5E8E3E"/></svg> // Simplified Shopify
+    logo: <svg viewBox="0 0 24 24"><path d="M19.5 9.5l-1.5-6h-12l-1.5 6h15z" fill="#96BF48"/><path d="M3 10l2 11h14l2-11H3z" fill="#5E8E3E"/></svg>
   },
   { 
     name: 'Notion', 
-    logo: <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm3 3h8v2H8V8zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" fill="#FFF"/></svg> // Clean Notion mock
+    logo: <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm3 3h8v2H8V8zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" fill="#FFF"/></svg>
   },
 ];
 
 export default function BrandsTicker() {
   const { i18n } = useTranslation();
-  const displayBrands = [...brands, ...brands, ...brands];
+  const displayBrands = [...brands, ...brands, ...brands, ...brands];
 
   return (
     <section className="brands-section">
       <div className="container">
-        <div className="brands-label">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="brands-label"
+        >
           {i18n.language === 'ar' ? 'نعمل مع الأفضل' : 'TRUSTED BY THE BEST'}
-        </div>
-        <div className="brands-ticker">
-          <div className="brands-track">
-            {displayBrands.map((brand, i) => (
-              <div key={i} className="brand-item" title={brand.name}>
-                <div className="brand-logo-wrapper">
-                  {brand.logo}
-                </div>
-                <span className="brand-name">{brand.name}</span>
-              </div>
-            ))}
-          </div>
+        </motion.div>
+        <div className="brands-ticker-container">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="brands-ticker"
+          >
+            <div className="brands-track">
+              {displayBrands.map((brand, i) => (
+                <motion.div 
+                  key={i} 
+                  className="brand-item" 
+                  title={brand.name}
+                  whileHover={{ scale: 1.1, opacity: 1, filter: 'grayscale(0)' }}
+                >
+                  <div className="brand-logo-wrapper">
+                    {brand.logo}
+                  </div>
+                  <span className="brand-name">{brand.name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

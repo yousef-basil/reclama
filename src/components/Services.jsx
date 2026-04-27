@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { Monitor, Smartphone, Search, PlayCircle, Fingerprint, ChevronRight } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import MockupLaptop from './MockupLaptop';
 import MockupPhone from './MockupPhone';
 import MockupSEO from './MockupSEO';
@@ -10,48 +10,118 @@ import MockupBranding from './MockupBranding';
 import FloatingShapes from './FloatingShapes';
 import './Services.css';
 
-const containerVariants = {
+/* ---- 3D Tilt Card Component ---- */
+function TiltCard({ children, className, size }) {
+  const ref = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), {
+    stiffness: 200, damping: 25, mass: 0.5
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), {
+    stiffness: 200, damping: 25, mass: 0.5
+  });
+  const glowX = useSpring(useTransform(mouseX, [-0.5, 0.5], [0, 100]), {
+    stiffness: 200, damping: 25
+  });
+  const glowY = useSpring(useTransform(mouseY, [-0.5, 0.5], [0, 100]), {
+    stiffness: 200, damping: 25
+  });
+
+  const handleMouseMove = (e) => {
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+    e.currentTarget.style.setProperty('--mouse-x', `${(x + 0.5) * 100}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${(y + 0.5) * 100}%`);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setIsHovered(false);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`service-card-bento ${size} ${isHovered ? 'is-hovered' : ''}`}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 1200,
+        transformStyle: 'preserve-3d',
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 80, rotateX: 25, scale: 0.85 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+        delay: 0.1,
+      }}
+    >
+      {/* Animated gradient border */}
+      <div className="card-border-glow" />
+      <div className="card-noise" />
+      <motion.div
+        className="card-glow"
+        style={{
+          background: useTransform(
+            [glowX, glowY],
+            ([x, y]) =>
+              `radial-gradient(circle at ${x}% ${y}%, rgba(191, 255, 0, 0.25) 0%, transparent 60%)`
+          ),
+          opacity: isHovered ? 1 : 0,
+        }}
+      />
+
+      {/* Shine sweep on hover */}
+      <div className="card-shine" />
+
+      {children}
+    </motion.div>
+  );
+}
+
+/* ---- Section Header Animations ---- */
+const headerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 };
 
-const cardVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 50, 
-    scale: 0.9,
-    rotateX: 15
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1, 
-    rotateX: 0,
-    transition: { 
-      type: "spring",
-      stiffness: 100,
-      damping: 20,
-      duration: 0.8 
-    }
+const itemVariants = {
+  hidden: { opacity: 0, y: 50, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { type: "spring", stiffness: 100, damping: 20 },
   },
 };
 
 export default function Services() {
   const { i18n } = useTranslation();
   const sectionRef = useRef(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   const services = i18n.language === 'ar'
     ? [
@@ -71,87 +141,73 @@ export default function Services() {
 
   return (
     <section id="services" className="services-section" ref={sectionRef}>
+      {/* Animated Background */}
       <motion.div className="parallax-bg" style={{ y: backgroundY }}>
         <FloatingShapes />
       </motion.div>
-      
+
+      {/* Dot grid pattern */}
+      <div className="services-grid-pattern" />
+
       <div className="container relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
+          variants={headerVariants}
           className="section-header"
         >
-          <motion.span variants={cardVariants} className="section-tag">
+          <motion.span variants={itemVariants} className="section-tag">
             {i18n.language === 'ar' ? 'ماذا نقدم' : 'What We Offer'}
           </motion.span>
-          <motion.h2 variants={cardVariants} className="section-title">
+          <motion.h2 variants={itemVariants} className="section-title">
             {i18n.language === 'ar' ? 'كل اللي محتاجه علامتك التجارية في مكان واحد' : 'Everything Your Brand Needs in One Place'}
           </motion.h2>
-          <motion.p variants={cardVariants} className="section-subtitle">
-            {i18n.language === 'ar' 
+          <motion.p variants={itemVariants} className="section-subtitle">
+            {i18n.language === 'ar'
               ? 'نحن نلغي الحاجة للتعامل مع أطراف متعددة. من الهوية والعلامة التجارية إلى البرمجيات المخصصة — نحن نبني النظام الذي تعمل عليه شركتك.'
               : 'We eliminate the need to deal with multiple parties. From identity and branding to customized software — we build the system your company operates on.'}
           </motion.p>
-          <motion.div variants={cardVariants} className="section-line"></motion.div>
+          <motion.div variants={itemVariants} className="section-line" />
         </motion.div>
 
-        <motion.div 
-          className="services-bento-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {services.map((s) => (
-            <motion.div
-              key={s.id}
-              variants={cardVariants}
-              whileHover={{ 
-                y: -15, 
-                scale: 1.02,
-                transition: { duration: 0.4, ease: "easeOut" }
-              }}
-              className={`service-card-bento ${s.size} has-mockup`}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
-              }}
-            >
-              <div className="card-noise"></div>
-              <div className="card-glow"></div>
-              
-              {/* 3D Mockups (Pure CSS/Framer - FAST) */}
-              {s.mockup === 'laptop' && <MockupLaptop />}
-              {s.mockup === 'phone' && <MockupPhone />}
-              {s.mockup === 'seo' && <MockupSEO />}
-              {s.mockup === 'video' && <MockupVideo />}
-              {s.mockup === 'branding' && <MockupBranding />}
+        <div className="services-bento-grid">
+          {services.map((s, index) => (
+            <TiltCard key={s.id} size={s.size}>
+              {/* 3D Mockups */}
+              <div className="mockup-3d-wrapper" style={{ transform: 'translateZ(40px)' }}>
+                {s.mockup === 'laptop' && <MockupLaptop />}
+                {s.mockup === 'phone' && <MockupPhone />}
+                {s.mockup === 'seo' && <MockupSEO />}
+                {s.mockup === 'video' && <MockupVideo />}
+                {s.mockup === 'branding' && <MockupBranding />}
+              </div>
 
-              <div className="card-content">
+              <div className="card-content" style={{ transform: 'translateZ(50px)' }}>
                 <div className="service-number">0{s.id}</div>
+
                 <div className="service-icon-wrapper">
-                   <div className="service-icon">{s.icon}</div>
-                   <div className="icon-shadow"></div>
+                  <div className="service-icon">
+                    <div className="icon-ring" />
+                    {s.icon}
+                  </div>
+                  <div className="icon-shadow" />
                 </div>
+
                 <div className="text-content">
-                    <h3 className="service-title">{s.title}</h3>
-                    <p className="service-desc">{s.desc}</p>
+                  <h3 className="service-title">{s.title}</h3>
+                  <p className="service-desc">{s.desc}</p>
                 </div>
-                
+
                 <div className="service-footer">
                   <div className="service-arrow">
                     <ChevronRight size={22} strokeWidth={3} />
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </TiltCard>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
