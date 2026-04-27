@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import Hero3DObject from './Hero3DObject';
 import './Hero.css';
 
 // Particle system for background with parallax effect
@@ -89,6 +88,22 @@ function ParticleCanvas() {
   );
 }
 
+// Spline 3D Viewer
+function Spline3D() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 300], [0.55, 0]);
+
+  return (
+    <motion.div style={{ y, opacity }} className="spline-container">
+      <spline-viewer 
+        url="https://prod.spline.design/4zqKhZ8Q87pUKmXg/scene.splinecode"
+        events-target="global"
+      ></spline-viewer>
+    </motion.div>
+  );
+}
+
 // Stats counter
 function AnimatedCounter({ target, label }) {
   const [count, setCount] = useState(0);
@@ -148,7 +163,7 @@ export default function Hero() {
   return (
     <section id="home" className="hero-section">
       <ParticleCanvas />
-      <Hero3DObject />
+      <Spline3D />
 
       {/* Gradient overlays with subtle animation */}
       <motion.div 
