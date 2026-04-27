@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import Hero3DObject from './Hero3DObject';
 import './Hero.css';
 
 // Particle system for background with parallax effect
@@ -147,6 +148,7 @@ export default function Hero() {
   return (
     <section id="home" className="hero-section">
       <ParticleCanvas />
+      <Hero3DObject />
 
       {/* Gradient overlays with subtle animation */}
       <motion.div 
